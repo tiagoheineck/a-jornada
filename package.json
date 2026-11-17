@@ -1,0 +1,11 @@
+{
+  "name": "a-jornada",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Jogo mobile: Tiago e o Almoço do Bispo (HTML, CSS e JavaScript puro)",
+  "type": "module",
+  "scripts": {
+    "dev": "python3 -m http.server 8080",
+    "check": "for f in $(find js -name '*.js') sw.js; do node --check \"$f\" || exit 1; done"
+  }
+}

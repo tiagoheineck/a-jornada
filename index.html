@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+  <meta name="theme-color" content="#ffb347">
+  <meta name="description" content="A Jornada — Tiago e o Almoço do Bispo. Um jogo de 9 fases para celular.">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <title>A Jornada — Tiago e o Almoço do Bispo</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="assets/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="assets/icon-192.png">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div id="app">
+    <canvas id="tela" aria-label="Área do jogo"></canvas>
+
+    <!-- HUD -->
+    <div id="hud" hidden>
+      <button id="btn-pausa" class="hud-btn" aria-label="Pausar">⏸</button>
+      <div id="hud-centro">
+        <span id="hud-fase">Fase 1</span>
+        <span id="hud-tempo">0:00</span>
+      </div>
+      <button id="btn-som" class="hud-btn" aria-label="Som ligado/desligado">🔊</button>
+    </div>
+
+    <!-- Legenda do narrador -->
+    <div id="legenda" hidden></div>
+
+    <!-- Camada de telas (capa, intro, resultado, pausa, fim) -->
+    <div id="camada"></div>
+
+    <div id="gire">
+      <div>📱↻</div>
+      <p>Gire o celular para a vertical</p>
+    </div>
+  </div>
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

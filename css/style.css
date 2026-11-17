@@ -1,0 +1,230 @@
+:root {
+  --verde: #1f7a3d;
+  --verde-claro: #2e9e52;
+  --laranja: #ff9f1c;
+  --amarelo: #ffe66d;
+  --escuro: #22223b;
+  --papel: #fffaf0;
+  --fonte: "Nunito", "Trebuchet MS", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --app-w: min(100vw, calc(100dvh * 9 / 16));
+  --app-h: min(100dvh, calc(100vw * 16 / 9));
+}
+
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+html, body {
+  margin: 0;
+  height: 100%;
+  background: #f4e9d8;
+  font-family: var(--fonte);
+  color: var(--escuro);
+  overflow: hidden;
+  overscroll-behavior: none;
+  -webkit-user-select: none;
+  user-select: none;
+  touch-action: manipulation;
+}
+
+#app {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  width: var(--app-w);
+  height: var(--app-h);
+  transform: translate(-50%, -50%);
+  overflow: hidden;
+  background: #fdf3e3;
+  box-shadow: 0 0 40px rgba(0, 0, 0, .15);
+}
+
+#tela {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  touch-action: none;
+}
+
+/* ---------- HUD ---------- */
+#hud {
+  position: absolute;
+  left: 0; right: 0; top: 0;
+  padding: calc(env(safe-area-inset-top) + 8px) 10px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  pointer-events: none;
+  z-index: 5;
+}
+#hud[hidden] { display: none; }
+.hud-btn {
+  pointer-events: auto;
+  width: 48px; height: 48px;
+  border-radius: 50%;
+  border: 3px solid var(--escuro);
+  background: #fff;
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: 0 3px 0 var(--escuro);
+}
+.hud-btn:active { transform: translateY(2px); box-shadow: 0 1px 0 var(--escuro); }
+#hud-centro {
+  display: flex; flex-direction: column; align-items: center;
+  background: #fff;
+  border: 3px solid var(--escuro);
+  border-radius: 14px;
+  padding: 2px 14px;
+  font-weight: 800;
+  font-size: 15px;
+  line-height: 1.2;
+}
+#hud-tempo { font-variant-numeric: tabular-nums; color: #b5301f; font-size: 18px; }
+
+/* ---------- Legenda ---------- */
+#legenda {
+  position: absolute;
+  left: 12px; right: 12px;
+  bottom: calc(env(safe-area-inset-bottom) + 12px);
+  background: var(--escuro);
+  color: #fff;
+  font-weight: 800;
+  font-size: clamp(15px, 4.4vw, 18px);
+  line-height: 1.3;
+  text-align: center;
+  padding: 10px 14px;
+  border-radius: 12px;
+  z-index: 4;
+  pointer-events: none;
+}
+#legenda[hidden] { display: none; }
+
+/* ---------- Camada de telas ---------- */
+#camada { position: absolute; inset: 0; z-index: 10; pointer-events: none; }
+.tela {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 14px;
+  padding: calc(env(safe-area-inset-top) + 20px) 22px calc(env(safe-area-inset-bottom) + 20px);
+  text-align: center;
+  pointer-events: auto;
+  animation: surgir .25s ease-out;
+}
+.tela.escurece { background: rgba(34, 34, 59, .55); }
+.tela.sol {
+  background:
+    repeating-conic-gradient(from 0deg at 50% 38%, #ffcf6b 0deg 10deg, #ffb347 10deg 20deg);
+}
+.tela.festa {
+  background:
+    repeating-conic-gradient(from 0deg at 50% 30%, #8e5bb5 0deg 10deg, #b06ab3 10deg 20deg);
+}
+@keyframes surgir { from { opacity: 0; transform: scale(.97); } to { opacity: 1; transform: none; } }
+
+.cartao {
+  background: var(--papel);
+  border: 4px solid var(--escuro);
+  border-radius: 20px;
+  padding: 20px 18px;
+  width: 100%;
+  max-width: 340px;
+  box-shadow: 0 6px 0 var(--escuro);
+}
+.cartao h2 { margin: 0 0 6px; font-size: 26px; line-height: 1.1; }
+.cartao p { margin: 8px 0; font-size: 17px; line-height: 1.35; font-weight: 700; }
+.cartao .dica {
+  background: #fff3c4;
+  border-radius: 10px;
+  padding: 8px 10px;
+  font-size: 16px;
+}
+
+.titulo-capa {
+  font-size: clamp(30px, 10vw, 44px);
+  line-height: 1.05;
+  font-weight: 900;
+  margin: 0;
+  color: #fff;
+  -webkit-text-stroke: 2px #6b2d0f;
+  paint-order: stroke fill;
+  text-shadow: 0 4px 0 #6b2d0f;
+}
+.titulo-capa small { display: block; font-size: .5em; color: var(--amarelo); }
+.sub-capa { font-weight: 800; font-size: 16px; color: #4a2208; margin: 0; }
+
+.btn {
+  pointer-events: auto;
+  min-height: 52px;
+  min-width: 180px;
+  padding: 12px 22px;
+  font: 900 19px var(--fonte);
+  color: #fff;
+  background: var(--verde);
+  border: 4px solid var(--escuro);
+  border-radius: 16px;
+  box-shadow: 0 5px 0 var(--escuro);
+  cursor: pointer;
+}
+.btn:active { transform: translateY(3px); box-shadow: 0 2px 0 var(--escuro); }
+.btn.sec { background: #fff; color: var(--escuro); }
+.btn.lar { background: #c2410c; }
+.botoes { display: flex; flex-direction: column; gap: 12px; align-items: center; width: 100%; }
+
+.estrelas { font-size: 40px; letter-spacing: 4px; margin: 4px 0; }
+.estrelas .off { filter: grayscale(1); opacity: .3; }
+
+.grade-fases {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  width: 100%;
+  max-width: 340px;
+}
+.grade-fases button {
+  min-height: 84px;
+  border: 4px solid var(--escuro);
+  border-radius: 14px;
+  background: #fff;
+  font: 900 24px var(--fonte);
+  color: var(--escuro);
+  box-shadow: 0 4px 0 var(--escuro);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 2px;
+  cursor: pointer;
+}
+.grade-fases button small { font-size: 14px; }
+.grade-fases button:disabled { background: #ddd; color: #666; box-shadow: none; }
+
+.fim-titulo {
+  font-size: 72px; font-weight: 900; margin: 0; color: #ffd23f;
+  -webkit-text-stroke: 3px #3d1f00; paint-order: stroke fill;
+  text-shadow: 0 5px 0 #3d1f00;
+}
+.selo {
+  display: inline-block;
+  background: #ffd23f;
+  border: 3px solid var(--escuro);
+  border-radius: 999px;
+  padding: 6px 14px;
+  font-weight: 900;
+  transform: rotate(-4deg);
+}
+
+/* ---------- Paisagem ---------- */
+#gire {
+  display: none;
+  position: fixed; inset: 0;
+  background: var(--escuro); color: #fff;
+  z-index: 50;
+  flex-direction: column; align-items: center; justify-content: center;
+  font-weight: 800; font-size: 20px; text-align: center;
+}
+#gire div { font-size: 64px; }
+@media (orientation: landscape) and (max-height: 520px) {
+  #gire { display: flex; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tela { animation: none; }
+}
